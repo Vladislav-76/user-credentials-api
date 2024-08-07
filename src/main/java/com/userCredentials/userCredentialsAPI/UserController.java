@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.Random;
 
 @RestController
 public class UserController {
@@ -35,8 +36,9 @@ public class UserController {
     }
 
     public static void randomDelay(int fromSeconds, int toSeconds) throws InterruptedException {
-        int delayInSeconds = fromSeconds + (int) (Math.random() * (toSeconds - fromSeconds + 1));
+        Random random = new Random();
+        int delayInSeconds = random.nextInt(fromSeconds, toSeconds + 1);
         long secondsInMilliseconds = 1000;
-        Thread.sleep(Math.abs(delayInSeconds * secondsInMilliseconds));
+        Thread.sleep(delayInSeconds * secondsInMilliseconds);
     }
 }
