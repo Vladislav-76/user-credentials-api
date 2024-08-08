@@ -8,13 +8,12 @@ public class UserController {
     final int DELAY_TO_SECONDS = 2;
 
     @GetMapping("/user")
-    public ResponseString getStringHello(
-            @RequestParam(value = "name", defaultValue = "World") String name
-    ) throws InterruptedException {
-        ResponseString response;
-        response = new ResponseString(String.format("Hello %s!", name));
+    public User getUser() throws InterruptedException {
+        String login = "loginExample";
+        String password = "passwordExample";
+        User user = new User(login, password);
         Delay.randomDelay(DELAY_FROM_SECONDS, DELAY_TO_SECONDS);
-        return response;
+        return user;
     }
 
     @PostMapping("/user")
