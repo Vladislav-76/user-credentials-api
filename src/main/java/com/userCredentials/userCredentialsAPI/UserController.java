@@ -1,11 +1,6 @@
 package com.userCredentials.userCredentialsAPI;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -23,13 +18,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public User postUser(
-            @RequestParam(value = "login", defaultValue = "login") String login,
-            @RequestParam(value = "password", defaultValue = "password") String password
-    ) throws InterruptedException {
-        Date date = new Date();
-        User user;
-        user = new User(login, password, date);
+    public User postUser(@RequestBody User user) throws InterruptedException {
         Delay.randomDelay(DELAY_FROM_SECONDS, DELAY_TO_SECONDS);
         return user;
     }
