@@ -1,5 +1,6 @@
 package com.userCredentials.userCredentialsAPI;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -8,17 +9,19 @@ public class UserController {
     final int DELAY_TO_SECONDS = 2;
 
     @GetMapping("/user")
-    public User getUser() throws InterruptedException {
-        String login = "loginExample";
-        String password = "passwordExample";
+    public ResponseEntity<User> user() throws InterruptedException {
+        String login = "fakeLogin";
+        String password = "fakePassword";
         User user = new User(login, password);
         Delay.randomDelay(DELAY_FROM_SECONDS, DELAY_TO_SECONDS);
-        return user;
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/user")
-    public User postUser(@RequestBody User user) throws InterruptedException {
+    public ResponseEntity<User> user(
+            @RequestBody User user
+    ) throws InterruptedException {
         Delay.randomDelay(DELAY_FROM_SECONDS, DELAY_TO_SECONDS);
-        return user;
+        return ResponseEntity.ok(user);
     }
 }
