@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-import java.util.Random;
 
 @RestController
 public class UserController {
@@ -19,7 +18,7 @@ public class UserController {
     ) throws InterruptedException {
         ResponseString response;
         response = new ResponseString(String.format("Hello %s!", name));
-        randomDelay(DELAY_FROM_SECONDS, DELAY_TO_SECONDS);
+        Delay.randomDelay(DELAY_FROM_SECONDS, DELAY_TO_SECONDS);
         return response;
     }
 
@@ -31,14 +30,7 @@ public class UserController {
         Date date = new Date();
         User user;
         user = new User(login, password, date);
-        randomDelay(DELAY_FROM_SECONDS, DELAY_TO_SECONDS);
+        Delay.randomDelay(DELAY_FROM_SECONDS, DELAY_TO_SECONDS);
         return user;
-    }
-
-    public static void randomDelay(int fromSeconds, int toSeconds) throws InterruptedException {
-        Random random = new Random();
-        int delayInSeconds = random.nextInt(fromSeconds, toSeconds + 1);
-        long secondsInMilliseconds = 1000;
-        Thread.sleep(delayInSeconds * secondsInMilliseconds);
     }
 }
