@@ -10,8 +10,8 @@ import java.util.Date;
 
 
 public class ServiceDB {
-//    final private static String SERVER_NAME = "192.168.88.56";
-    final private static String SERVER_NAME = "localhost";
+    final private static String SERVER_NAME = "192.168.88.56";
+//    final private static String SERVER_NAME = "localhost";
     final private static int PORT_NUMBER = 5432;
     final private static String DATABASE_NAME = "postgres_db";
     final private static String DATABASE_USER = "postgres";
@@ -53,7 +53,8 @@ public class ServiceDB {
                 String email = resultSet.getString(2);
                 Date date = resultSet.getDate(3);
                 return new User(login, password, email, date);
-            } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Пользователь не найден");
+            } else throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR, "Пользователь не найден");
         } finally {
             if (resultSet != null) resultSet.close();
             if (statement != null) statement.close();
