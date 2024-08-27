@@ -1,15 +1,17 @@
-package com.userCredentials.userCredentialsAPI;
+package com.userCredentials.userCredentialsAPI.validation;
 
+import com.userCredentials.userCredentialsAPI.models.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
 public class Validate {
-    public static User validatedUser(HashMap<String, String> requestBody) {
-        HashMap<String, String> REQUIRED_FIELDS = new HashMap<>();
+    public static User validatedUser(Map<String, String> requestBody) {
+        Map<String, String> REQUIRED_FIELDS = new HashMap<>();
         REQUIRED_FIELDS.put("login", "login");
         REQUIRED_FIELDS.put("password", "password");
+        REQUIRED_FIELDS.put("email", "email");
         final int MAX_FIELDS_LENGTH = 64;
         final int MIN_PASSWORD_LENGTH = 8;
         String fieldsByString = REQUIRED_FIELDS.values().toString();
@@ -54,6 +56,11 @@ public class Validate {
             String fullMessage = String.join("; ", messages);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, fullMessage);
         }
-        return new User(requestBody.get("login"), requestBody.get("password"));
+        return new User(
+                requestBody.get("login"),
+                requestBody.get("password"),
+                requestBody.get("email"),
+                new Date()
+        );
     }
 }

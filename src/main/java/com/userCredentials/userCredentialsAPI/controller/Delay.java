@@ -1,4 +1,4 @@
-package com.userCredentials.userCredentialsAPI;
+package com.userCredentials.userCredentialsAPI.controller;
 
 import java.util.Random;
 
